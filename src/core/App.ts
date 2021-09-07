@@ -7,13 +7,11 @@ import compression from 'compression'
 import cors from 'cors'
 import path from 'path'
 import database from './database'
+import bootstraping from '../helpers/bootstraping'
 
 // import configurations
 import appConfig from '../config/appConfig'
 import IApp from '../config/IApp'
-
-// import all routes
-import authRoutes from '../routes/Auth'
 
 namespace AppModule {
 	export class App implements IApp {
@@ -27,7 +25,7 @@ namespace AppModule {
 			this.startup()
 		}
 
-		protected startup (): void {
+		protected async startup (): Promise<void> {
 			// setup several middlewares
 			this.app.use(compression())
 			this.app.use(helmet())
@@ -53,9 +51,18 @@ namespace AppModule {
 
 			this.app.use(cors(corsOptions))
 
-			database.users.sync()
+			database.sequelize.sync({
+				force: false
+			})
 
-			this.app.use('/api/v1', authRoutes.authRoutes)
+			try {
+				const routes: any = await bootstraping('../routes')
+				routes.forEach((route: any) => {
+					this.app.use('/api/v1', route.default.routers)
+				})
+			} catch (err: any) {
+				console.log(err)
+			}
 		}
 
 		public listen (): void {

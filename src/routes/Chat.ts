@@ -4,17 +4,17 @@ import { Router } from 'express'
 import RoutesModule from '../core/Routes'
 
 // import all controllers
-import authControllers from '../controllers/Auth'
+import chatControllers from '../controllers/Chat'
 
-namespace AuthRoutesModule {
-	export class AuthRoutes extends RoutesModule.Routes {
+namespace ChatRoutesModule {
+	export class ChatRoutes extends RoutesModule.Routes {
 		constructor () {
 			super()
 			this.routes()
 		}
 
 		public routes (): void {
-			this.getRouter.post('/auth/register', authControllers.Auth.register)
+			this.getRouter.post('/chat', chatControllers.Chat.send)
 		}
 
 		public get routers (): Router {
@@ -23,4 +23,4 @@ namespace AuthRoutesModule {
 	}
 }
 
-export default new AuthRoutesModule.AuthRoutes()
+export default new ChatRoutesModule.ChatRoutes()

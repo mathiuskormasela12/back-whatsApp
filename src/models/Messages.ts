@@ -4,39 +4,29 @@
 import { Model } from 'sequelize'
 
 export default (sequelize: any, DataTypes: any) => {
-	class User extends Model {
+	class Message extends Model {
 		static associate (models: any) {
 			// define associaton here
 		}
 	}
 
-	User.init({
-		phone_number: {
+	Message.init({
+		sender_id: {
 			allowNull: false,
 			type: DataTypes.STRING(100)
 		},
-		first_name: {
+		receiver_id: {
 			allowNull: false,
 			type: DataTypes.STRING(100)
 		},
-		last_name: {
-			allowNull: true,
-			type: DataTypes.STRING(255)
-		},
-		photo: {
-			allowNull: false,
-			type: DataTypes.STRING(255),
-			defaultValue: 'nophoto.png'
-		},
-		status: {
+		message: {
 			allowNull: true,
 			type: DataTypes.TEXT
 		}
 	}, {
 		sequelize,
-		modelName: 'users',
-		schema: 'wa_auth'
+		modelName: 'messages'
 	})
 
-	return User
+	return Message
 }

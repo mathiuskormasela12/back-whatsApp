@@ -11,13 +11,13 @@ export default {
 		'http://localhost:3000',
 		'http://127.0.0.1:3000'
 	],
+	nodeEnv: String(process.env.NODE_ENV || 'development'),
 	database: {
 		host: String(process.env.DB_HOST),
 		user: String(process.env.DB_USER),
 		password: String(process.env.DB_PASSWORD),
 		database: String(process.env.DB_NAME),
-		dialect: 'postgres',
-		port: Number(process.env.DB_PORT || 5432),
+		dialect: 'mysql',
 		pool: {
 			acquire: 30000,
 			idle: 10000,
