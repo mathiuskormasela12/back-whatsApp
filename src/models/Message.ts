@@ -7,10 +7,12 @@ export default (sequelize: any, DataTypes: any) => {
 		static associate (models: any) {
 			// define associaton here
 			Message.belongsTo(models.users, {
+				foreignKey: 'sender_id',
 				targetKey: 'id'
 			})
 
 			Message.belongsTo(models.users, {
+				foreignKey: 'receiver_id',
 				targetKey: 'id'
 			})
 		}
@@ -19,11 +21,19 @@ export default (sequelize: any, DataTypes: any) => {
 	Message.init({
 		sender_id: {
 			allowNull: false,
-			type: DataTypes.STRING(100)
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'users',
+				key: 'id'
+			}
 		},
 		receiver_id: {
 			allowNull: false,
-			type: DataTypes.STRING(100)
+			type: DataTypes.INTEGER,
+			references: {
+				model: 'users',
+				key: 'id'
+			}
 		},
 		message: {
 			allowNull: true,
