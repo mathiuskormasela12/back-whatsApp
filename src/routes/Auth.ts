@@ -6,6 +6,11 @@ import RoutesModule from '../core/Routes'
 // import all controllers
 import authControllers from '../controllers/Auth'
 
+// import all middlewares
+import {
+	checkAuthForms
+} from '../middlewares/auth'
+
 namespace AuthRoutesModule {
 	export class AuthRoutes extends RoutesModule.Routes {
 		constructor () {
@@ -14,7 +19,7 @@ namespace AuthRoutesModule {
 		}
 
 		public routes (): void {
-			this.getRouter.post('/auth/register', authControllers.Auth.register)
+			this.getRouter.post('/auth', checkAuthForms, authControllers.Auth.login)
 		}
 
 		public get routers (): Router {
