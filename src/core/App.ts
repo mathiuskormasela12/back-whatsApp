@@ -5,9 +5,12 @@ import morgan from 'morgan'
 import helmet from 'helmet'
 import compression from 'compression'
 import cors from 'cors'
+import upload from 'express-fileupload'
+import http from 'http'
 import path from 'path'
 import database from './database'
-import bootstraping from '../helpers/bootstraping'
+import bootstraping from '../helpers/bootstrap'
+import socket from '../middlewares/socket'
 
 // import configurations
 import appConfig from '../config/appConfig'
@@ -26,6 +29,21 @@ namespace AppModule {
 		}
 
 		protected async startup (): Promise<void> {
+			// setup express-fileupload
+			this.app.use(upload(appConfig.upload))
+
+			// setup socket.io
+			const server: any = http.createServer(this.app)
+			const io: any = require('socket.io')(server, {
+				origin: appConfig.clients.map((origin: any) => ({ origin }))
+			})
+
+			io.on('connection', () => {
+				console.log('a user has connected')
+			})
+
+			this.app.use(socket(io))
+
 			// setup several middlewares
 			this.app.use(compression())
 			this.app.use(helmet())

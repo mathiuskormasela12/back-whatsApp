@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // =========== Users Model
 // import all modules
 import { Model } from 'sequelize'
@@ -7,6 +6,13 @@ export default (sequelize: any, DataTypes: any) => {
 	class Message extends Model {
 		static associate (models: any) {
 			// define associaton here
+			Message.belongsTo(models.users, {
+				targetKey: 'id'
+			})
+
+			Message.belongsTo(models.users, {
+				targetKey: 'id'
+			})
 		}
 	}
 

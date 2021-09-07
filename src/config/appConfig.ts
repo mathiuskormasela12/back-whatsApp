@@ -12,6 +12,9 @@ export default {
 		'http://127.0.0.1:3000'
 	],
 	nodeEnv: String(process.env.NODE_ENV || 'development'),
+	upload: {
+		createParentPath: true
+	},
 	database: {
 		host: String(process.env.DB_HOST),
 		user: String(process.env.DB_USER),
