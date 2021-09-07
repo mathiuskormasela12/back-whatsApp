@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 // ========== Boostraping
 // import all modules
 import fs from 'fs'
