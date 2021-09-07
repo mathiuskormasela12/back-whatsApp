@@ -8,7 +8,8 @@ import authControllers from '../controllers/Auth'
 
 // import all middlewares
 import {
-	checkAuthForms
+	checkAuthForms,
+	checkOTP
 } from '../middlewares/auth'
 
 namespace AuthRoutesModule {
@@ -20,6 +21,7 @@ namespace AuthRoutesModule {
 
 		public routes (): void {
 			this.getRouter.post('/auth', checkAuthForms, authControllers.Auth.login)
+			this.getRouter.put('/auth/:id', checkOTP, authControllers.Auth.verifyOtp)
 		}
 
 		public get routers (): Router {

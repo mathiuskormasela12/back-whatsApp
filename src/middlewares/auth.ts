@@ -1,7 +1,7 @@
 // ========== Auth Middlewares
 // import all modules
 import { Request, Response, NextFunction } from 'express'
-import { body, validationResult } from 'express-validator'
+import { body, param, validationResult } from 'express-validator'
 import response from '../helpers/response'
 
 export const checkAuthForms: any[] = [
@@ -23,12 +23,14 @@ export const checkAuthForms: any[] = [
 ]
 
 export const checkOTP: any[] = [
-	body('phone_number', 'OTP is required')
+	param('id', 'Incorrect id')
+		.isInt(),
+	body('otp', 'OTP is required')
 		.notEmpty(),
-	body('phone_number', 'Incorrect OTP')
+	body('otp', 'Incorrect OTP')
 		.isNumeric()
 		.isLength({
-			min: 6,
+			min: 5,
 			max: 5
 		}),
 
