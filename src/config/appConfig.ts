@@ -15,6 +15,11 @@ export default {
 	upload: {
 		createParentPath: true
 	},
+	twilio: {
+		account_sid: String(process.env.TWILIO_ACCOUNT_SID),
+		account_token: String(process.env.TWILIO_ACCOUNT_TOKEN),
+		account_phone_number: String(process.env.TWILIO_PHONE_NUMBER)
+	},
 	database: {
 		host: String(process.env.DB_HOST),
 		user: String(process.env.DB_USER),
