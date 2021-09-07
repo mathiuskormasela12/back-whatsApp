@@ -9,8 +9,6 @@ export const checkAuthForms: any[] = [
 		.notEmpty(),
 	body('phone_number', 'Incorrect phone number')
 		.isMobilePhone('id-ID'),
-	body('first_name', 'First name is required')
-		.notEmpty(),
 	(req: Request, res: Response, next: NextFunction) => {
 		const errors = validationResult(req)
 

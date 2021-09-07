@@ -41,7 +41,6 @@ namespace AuthControllerModule {
 				} else {
 					try {
 						const results: any = await users.create({
-							first_name: req.body.first_name,
 							phone_number: phoneNumberGenerator(req.body.phone_number),
 							otp: randomNumbers
 						})

@@ -23,7 +23,7 @@ export default (sequelize: any, DataTypes: any) => {
 			unique: true
 		},
 		first_name: {
-			allowNull: false,
+			allowNull: true,
 			type: DataTypes.STRING(100)
 		},
 		last_name: {
