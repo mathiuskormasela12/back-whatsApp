@@ -1,7 +1,7 @@
 {
   "name": "back-whatsapp",
   "version": "1.0.0",
-  "description": "WhatsApp Clone with new UI Design, build with MERN Stack",
+  "description": "WhatsApp Clone with new UI Design, build with PERN Stack",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
