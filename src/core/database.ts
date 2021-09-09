@@ -15,7 +15,8 @@ namespace DatabaseModule {
 		constructor () {
 			this.sequelize = new Sequelize(appConfig.database.database, appConfig.database.user, appConfig.database.password, {
 				host: appConfig.database.host,
-				dialect: 'mysql',
+				dialect: 'postgres',
+				port: appConfig.database.port,
 				pool: {
 					max: appConfig.database.pool.max,
 					min: appConfig.database.pool.min,
