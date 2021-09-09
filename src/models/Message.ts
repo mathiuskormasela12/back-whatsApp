@@ -23,7 +23,10 @@ export default (sequelize: any, DataTypes: any) => {
 			allowNull: false,
 			type: DataTypes.INTEGER,
 			references: {
-				model: 'users',
+				model: {
+					schema: 'whatsapp_auth',
+					tableName: 'users'
+				},
 				key: 'id'
 			}
 		},
@@ -31,7 +34,10 @@ export default (sequelize: any, DataTypes: any) => {
 			allowNull: false,
 			type: DataTypes.INTEGER,
 			references: {
-				model: 'users',
+				model: {
+					schema: 'whatsapp_auth',
+					tableName: 'users'
+				},
 				key: 'id'
 			}
 		},
@@ -41,7 +47,8 @@ export default (sequelize: any, DataTypes: any) => {
 		}
 	}, {
 		sequelize,
-		modelName: 'messages'
+		modelName: 'messages',
+		schema: 'whatsapp_chat'
 	})
 
 	return Message

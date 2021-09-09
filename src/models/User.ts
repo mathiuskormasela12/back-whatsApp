@@ -45,7 +45,8 @@ export default (sequelize: any, DataTypes: any) => {
 		}
 	}, {
 		sequelize,
-		modelName: 'users'
+		modelName: 'users',
+		schema: 'whatsapp_auth'
 	})
 
 	return User

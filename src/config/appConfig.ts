@@ -3,29 +3,44 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
+const {
+	PORT = 3000,
+	APP_URL,
+	SECRET_KEY,
+	NODE_ENV = 'development',
+	TWILIO_ACCOUNT_SID,
+	TWILIO_ACCOUNT_TOKEN,
+	TWILIO_PHONE_NUMBER,
+	DB_HOST,
+	DB_PORT = 5432,
+	DB_USER,
+	DB_PASSWORD,
+	DB_NAME
+} = process.env
+
 export default {
-	port: Number(process.env.PORT || 3000),
-	appUrl: String(process.env.APP_URL),
-	secretKey: String(process.env.SECRET_KEY),
+	port: Number(PORT),
+	appUrl: String(APP_URL),
+	secretKey: String(SECRET_KEY),
 	clients: [
 		'http://localhost:3000',
 		'http://127.0.0.1:3000'
 	],
-	nodeEnv: String(process.env.NODE_ENV || 'development'),
+	nodeEnv: String(NODE_ENV),
 	upload: {
 		createParentPath: true
 	},
 	twilio: {
-		account_sid: String(process.env.TWILIO_ACCOUNT_SID),
-		account_token: String(process.env.TWILIO_ACCOUNT_TOKEN),
-		account_phone_number: String(process.env.TWILIO_PHONE_NUMBER)
+		account_sid: String(TWILIO_ACCOUNT_SID),
+		account_token: String(TWILIO_ACCOUNT_TOKEN),
+		account_phone_number: String(TWILIO_PHONE_NUMBER)
 	},
 	database: {
-		host: String(process.env.DB_HOST),
-		user: String(process.env.DB_USER),
-		password: String(process.env.DB_PASSWORD),
-		database: String(process.env.DB_NAME),
-		dialect: 'mysql',
+		host: String(DB_HOST),
+		user: String(DB_USER),
+		password: String(DB_PASSWORD),
+		database: String(DB_NAME),
+		port: Number(DB_PORT),
 		pool: {
 			acquire: 30000,
 			idle: 10000,
