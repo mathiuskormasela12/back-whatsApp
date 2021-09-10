@@ -2,7 +2,12 @@
 // import all modules
 import { Request, Response, NextFunction } from 'express'
 import { body, param, validationResult } from 'express-validator'
+import jwt from 'jsonwebtoken'
+import { Middleware } from '../config/types'
 import response from '../helpers/response'
+import appConfig from '../config/appConfig'
+
+const { secretKey } = appConfig
 
 export const checkAuthForms: any[] = [
 	body('phone_number', 'Phone number is required')
@@ -42,3 +47,19 @@ export const checkOTP: any[] = [
 		return next()
 	}
 ]
+
+export const isLogin: Middleware = (req: Request, res: Response, next: NextFunction): Response | void => {
+	const token = req.headers.authorization
+
+	if (token) {
+		try {
+			const results = jwt.verify(token, secretKey)
+			req.app.locals.token = results
+			next()
+		} catch (err: any) {
+			return response(req, res, 400, err.message, false)
+		}
+	} else {
+		return response(req, res, 400, 'Forbidden', false)
+	}
+}
