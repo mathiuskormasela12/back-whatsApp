@@ -83,7 +83,7 @@ namespace AuthControllerModule {
 							await users.update({ otp: null }, {
 								where: { id }
 							})
-							return response(req, res, 200, 'Successfully to login', true, { token })
+							return response(req, res, 200, 'Successfully to login', true, { token, is_user_name_exists: !!isExists.first_name })
 						} catch (err: any) {
 							console.log(err)
 							return response(req, res, 500, err.message, false)

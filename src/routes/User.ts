@@ -5,6 +5,7 @@ import RoutesModule from '../core/Routes'
 
 // import all middlewares
 import { isLogin } from '../middlewares/auth'
+import { checkEditUsernameForm } from '../middlewares/user'
 
 // import all controllers
 import userControllers from '../controllers/User'
@@ -17,7 +18,7 @@ namespace UserRoutesModule {
 		}
 
 		public routes (): void {
-			this.getRouter.patch('/user', isLogin, userControllers.User.editUser)
+			this.getRouter.patch('/user/name/:id', isLogin, checkEditUsernameForm, userControllers.User.editUsername)
 		}
 
 		public get routers (): Router {
